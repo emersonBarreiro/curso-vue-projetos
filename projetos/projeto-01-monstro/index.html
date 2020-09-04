@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Matador de Monstro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="panel scores">
+            <div class="score">
+                <h1>Jogador</h1>
+                <div class="life-bar">
+                    <div class="life"
+                        :class="{danger: playerLife<20}"
+                         :style="{width: playerLife + '%'}">
+                    </div>
+                </div>
+                <div>{{playerLife}}%</div>
+            </div>
+            <div class="score">
+                <h1>Monstro</h1>
+                <div class="life-bar">
+                    <div class="life" 
+                        :class="{danger: monsterLife<20}"
+                        :style="{width: monsterLife + '%'}">
+                    </div>
+                </div>
+                <div>{{monsterLife}}%</div>
+            </div>
+        </div>
+        <div v-if="hasResult" class="panel result">
+            <div v-if="playerLife==0" class="lose">Você perdeu</div>
+            <div v-else class="win">Você ganhou</div>
+        </div>
+        <div class="panel buttons">
+            <template v-if="gameStarted">
+                <button class="btn" id="btn-attack" @click="attack(false)">ATAQUE</button>
+                <button class="btn" id="btn-special-attack" @click="attack(true)">ATAQUE ESPECIAL</button>
+                <button class="btn" id="btn-heal" @click="healAndHurt()">CURAR</button>
+                <button class="btn" id="btn-surrender" @click="changeGameStatus()">DESISTIR</button>
+            </template>
+            <template v-else>
+                <button class="btn" id="btn-start" @click="changeGameStatus()">INICIAR NOVO JOGO</button>
+            </template>
+        </div>
+        <div v-if="logs.length" class="panel logs">
+            <div v-for="log in logs" :class="log.cls">{{log.text}}</div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
