@@ -45,7 +45,12 @@
             </template>
         </div>
         <div v-if="logs.length" class="panel logs">
-            <div v-for="log in logs" :class="log.cls">{{log.text}}</div>
+            <ul>
+                <li 
+                    v-for="log in logs" 
+                    :class="log.cls">{{log.text}}
+                </li>
+            </ul>
         </div>
     </div>
     <script src="app.js"></script>

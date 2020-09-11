@@ -21,17 +21,19 @@ new Vue({
             this.logs = [];
         },
         attack(special){
-            this.hurt('player', 'monster', 5,10,special, 'playerLog');
-            this.hurt('monster', 'player', 5,10,!special, 'monsterLog');
+            this.hurt('player', 'monster', 5,10,special, 'player');
+            if(this.monsterLife > 0){
+                this.hurt('monster', 'player', 5,10,!special, 'monster');
+            }
         },
         heal(min, max){
             const heal = this.getRandom(min, max);
             this.playerLife = Math.min(heal+this.playerLife, 100);
-            this.registerLog('Player heals '+ heal + ' points', 'healLog');
+            this.registerLog(`Player heals  ${heal}  points.`, 'heal');
         },
         healAndHurt(){
             this.heal(5, 10);
-            this.hurt('monster', 'player', 5, 10, false, 'monsterLog');
+            this.hurt('monster', 'player', 5, 10, false, 'monster');
         },
         hurt(attacker, defender, min, max, special, cls){
             const plus = special?10:0;
@@ -45,7 +47,7 @@ new Vue({
 
             this[lifeAttr] = Math.max(this[lifeAttr]-attack, 0);
             
-            this.registerLog(attacker + ' hits '+ defender + ' with '+ attack + ' points.', cls)
+            this.registerLog(`${attacker} hits ${defender} with ${attack} points.`, cls)
         },
         getRandom(min, max){
             const value = Math.random()*(max-min)+min
