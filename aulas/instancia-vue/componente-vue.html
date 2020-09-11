@@ -1,0 +1,53 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+   <!-- <comp></comp> -->
+   <!-- <div class="comp"></div> -->
+   <!-- para usarmos um componente,
+    usamos uma tag com o mesmo nome registrado -->
+    <comp></comp>
+    <comp></comp>
+    <comp></comp>
+    <comp></comp>
+</div>
+
+
+<script>
+    //registra um componente globalmente
+    Vue.component('comp', {
+        template: `
+            <div>
+                <h1 >{{aula}}</h1>
+                <h2>{{modulo}}</h2>
+                <button @click="alterarAula">Alterar Aula</button>
+                <button @click="alterarModulo">Alterar Módulo</button>
+            </div>
+        `,
+        //não é possível fazer da mesma forma que diretamente na instância,
+        //por isto é necessário fazer uma função retornando um objeto
+        data: function(){
+            return{
+                aula: 'Aula: Montando Instância Vue',
+                modulo: 'Instância Vue'
+            }
+        },
+        methods:{
+            alterarAula(){
+                this.aula += "#"
+            },
+            alterarModulo(){
+                this.modulo += "#"
+            },
+        }
+    })
+    const vm = new Vue({
+        el: '#app',
+        //podemos vincular a uma tag
+        // el: 'comp',
+        //a uma classe
+        // el: ".comp",
+        
+    })
+    
+</script>

@@ -1,0 +1,29 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    {{titulo}} {{novaInfo}}
+    <button @click="alterar()">Alterar</button>
+</div>
+
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data:{
+            titulo: 'Teste 1'
+        },
+        methods:{
+            alterar(){
+                this.titulo += "!"
+            }
+        }
+    })
+
+    //isso vai dar problema, pois esta propriedade não é reativa
+    //ou seja, ela não contém tudo que é necessário para ser interpolado pelo vue, 
+    //já que foi criada externamente ao objeto de configuração 
+    vm.novaInfo = 'teste';
+    console.log(vm.novaInfo);
+    
+</script>
