@@ -14,7 +14,17 @@
 
 <script>
 export default {
-    props: ['texto', 'fonte', 'autor']
+    // props: ['texto', 'fonte', 'autor']
+    //temos os métodos de ciclo de vida adicionais
+    //activated e deactivated para mostrar quando o 
+    //componente é ativado o desativado caso este esteja
+    //com keep-alive
+    activated(){
+        console.log('activated');
+    },
+    deactivated(){
+        console.log('deactivated');
+    }
 }
 </script>
 

@@ -1,7 +1,16 @@
 <template>
 	<div id="app">
-		<Citacoes />
-		<Sobre />
+		<span>
+			<button @click="componente='Citacoes'">Citações</button>
+			<button @click="componente='Sobre'">Sobre</button>
+		</span>
+		<!-- é possível usar componentes dinâmicos usando uma variável e a tag component -->
+		<!-- toda vez que tiramos ou colocamos um componente dinâmico, este por padrão é criado ou destruído 
+		 	 a tag keep-alive prevnine este comportamento-->
+		<keep-alive>
+			<component :is="componente">
+		</keep-alive>
+		
 	</div>
 </template>
 
@@ -10,7 +19,15 @@ import Citacoes from './components/Citacoes'
 import Sobre from './components/Sobre'
 
 export default {
-	components: { Citacoes, Sobre }
+	components: { Citacoes, Sobre },
+	data(){
+		return{
+			
+			componente : "Citacoes"
+		}
+	},
+	
+	
 }
 </script>
 
